@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Moonus</title>
+  <link rel="stylesheet" href="./css/master.css">
+</head>
+
+<body>
+  <script type="module">
+    import Moonus from './js/moonus.js';
+    // import Times from './js/Times.js';
+    // let testTimes = new Times(36.7201600, -4.4203400);
+    // testTimes.get();
+
+    let MoonusCanvas = new Moonus(36.7201600, -4.4203400);
+    MoonusCanvas.drawClock();
+    // setInterval(MoonusCanvas.drawClock(), 1000);
+  </script>
+</body>
+
+</html>
