@@ -1,1 +1,5 @@
 = MOONUS
+
+:imagesdir: img
+
+image::moonus.png[Moonus Logo, 200, align=center]
