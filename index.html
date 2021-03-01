@@ -3,21 +3,26 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Moonus</title>
+  <title>Sunus</title>
   <link rel="stylesheet" href="./css/master.css">
 </head>
 
 <body>
   <p>times by <a href="https://sunrise-sunset.org/api">sunrise-sunset.org</a> API</p>
+
+  <main id="clock"></main>
+
   <script type="module">
-  import Moonus from './js/Moonus.js';
+    import Sunus from './js/Sunus.js';
     // import Times from './js/Times.js';
     // let testTimes = new Times(36.7201600, -4.4203400);
     // testTimes.get();
 
-    let MoonusCanvas = new Moonus(36.7201600, -4.4203400);
-    MoonusCanvas.drawClock();
-    // setInterval(MoonusCanvas.drawClock(), 1000);
+    let clock, SunusCanvas;
+    clock = document.querySelector('#clock');
+    SunusCanvas = new Sunus(clock, 36.7201600, -4.4203400);
+    // SunusCanvas.drawClock();
+    setInterval(SunusCanvas.drawClock(), 1000);
   </script>
 </body>
 

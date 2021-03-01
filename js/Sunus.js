@@ -2,29 +2,44 @@ import Utils from './Utils.js';
 import Times from './Times.js';
 
 export {
-  Moonus as
+  Sunus as
   default
 };
 
 /**
- * Moonus
+ * Sunus
  * @author David Wolf
  */
-class Moonus extends Times {
+class Sunus extends Times {
 
   /**
-   *
+   * @param parent {node}
    */
-  constructor(lat, lng) {
+  constructor(parent, lat, lng) {
     // console.log(super());
     super(lat, lng);
     this.times = super.get();
 
+    this.config = {
+      size: 300,
+      colors: {
+        // https://www.rapidtables.com/web/color/Gold_Color.html
+        text: '#222',
+        sun: '#222',
+        day: '#ffba00',
+        civil: '#ffa500',
+        nautical: '#ff9000',
+        astro: '#ff7b00',
+        night: '#ff6500',
+      },
+    };
+
     // create canvas
-    let canvas = document.createElement('canvas');
-    canvas.setAttribute('width', '300px');
-    canvas.setAttribute('height', '300px');
-    document.body.appendChild(canvas);
+    let canvas;
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('width', `${this.config.size}px`);
+    canvas.setAttribute('height', `${this.config.size}px`);
+    parent.appendChild(canvas);
 
     this.ctx = canvas.getContext('2d');
 
@@ -40,19 +55,35 @@ class Moonus extends Times {
   drawClock() {
     // background
     this.ctx.arc(0, 0, this.radius, 0, 2 * Math.PI);
-    this.ctx.fillStyle = '#333';
+    this.ctx.fillStyle = this.config.colors.night;
     this.ctx.fill();
 
     // astro twilight
-    this.drawPie('#423', this.times.astronomical_twilight_begin, this.times.astronomical_twilight_end);
+    this.drawPie(
+      this.config.colors.astro,
+      this.times.astronomical_twilight_begin,
+      this.times.astronomical_twilight_end
+    );
 
     // nautical twilight
-    this.drawPie('#400', this.times.nautical_twilight_begin, this.times.nautical_twilight_end);
+    this.drawPie(
+      this.config.colors.nautical,
+      this.times.nautical_twilight_begin,
+      this.times.nautical_twilight_end
+    );
 
     // civil twilight
-    this.drawPie('#040', this.times.civil_twilight_begin, this.times.civil_twilight_end);
+    this.drawPie(
+      this.config.colors.civil,
+      this.times.civil_twilight_begin,
+      this.times.civil_twilight_end
+    );
     // sun day
-    this.drawPie('#133', this.times.sunrise, this.times.sunset);
+    this.drawPie(
+      this.config.colors.day,
+      this.times.sunrise,
+      this.times.sunset
+    );
 
     // time hands
     // drawTime(this.ctx, this.radius);
@@ -96,7 +127,7 @@ class Moonus extends Times {
     this.ctx.closePath();
 
     this.ctx.lineWidth = width;
-    this.ctx.strokeStyle = '#866';
+    this.ctx.strokeStyle = this.config.colors.text;
 
     this.ctx.stroke();
 
@@ -117,8 +148,7 @@ class Moonus extends Times {
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.radius / 10, 0, 2 * Math.PI);
 
-    this.ctx.fillStyle = '#a55';
-
+    this.ctx.fillStyle = this.config.colors.sun;
     this.ctx.fill();
   }
 
@@ -130,8 +160,8 @@ class Moonus extends Times {
     let num;
     let ang;
 
-    this.ctx.font = `${this.radius * 0.1}px Roboto`;
-    this.ctx.fillStyle = '#888';
+    this.ctx.font = `${this.radius * 0.1}px Georgia`;
+    this.ctx.fillStyle = this.config.colors.text;
 
     // centering
     this.ctx.textBaseline = 'middle';
