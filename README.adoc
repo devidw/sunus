@@ -1,7 +1,7 @@
-= MOONUS
+= SUNUS
 
 :imagesdir: img
 
-image::moonus.png[Moonus Logo, 200]
+// image::moonus.png[Moonus Logo, 200]
 
 See https://devidwolf.github.io/moonus/[live]
