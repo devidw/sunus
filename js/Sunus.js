@@ -15,10 +15,10 @@ class Sunus extends Times {
   /**
    * @param parent {node}
    */
-  constructor(parent, lat, lng) {
+  constructor(parent) {
     // console.log(super());
-    super(lat, lng);
-    this.times = super.get();
+    super();
+    this.times = this.get();
 
     this.config = {
       size: 300,

@@ -15,9 +15,14 @@ class Times {
    * @param lat {float}
    * @param lng {float}
    */
-  constructor(lat, lng) {
-    this.lat = lat;
-    this.lng = lng;
+  constructor() {
+    navigator.geolocation.getCurrentPosition(this.geo);
+    console.log(this.lat);
+  }
+
+  geo(position) {
+   this.lat = position.coords.latitude;
+   this.lng = position.coords.longitude;
   }
 
   /**
