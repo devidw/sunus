@@ -16,14 +16,12 @@ class Sunus extends Times {
    * @param parent {node}
    */
   constructor(parent) {
-    // console.log(super());
     super();
-    this.times = this.get();
+    navigator.geolocation.getCurrentPosition(super.api.bind(this));
 
     this.config = {
-      size: 300,
+      size: 300, // width, height in pixel
       colors: {
-        // https://www.rapidtables.com/web/color/Gold_Color.html
         text: '#222',
         sun: '#222',
         day: '#ffba00',
@@ -61,28 +59,28 @@ class Sunus extends Times {
     // astro twilight
     this.drawPie(
       this.config.colors.astro,
-      this.times.astronomical_twilight_begin,
-      this.times.astronomical_twilight_end
+      this.degrees.astronomical_twilight_begin,
+      this.degrees.astronomical_twilight_end
     );
 
     // nautical twilight
     this.drawPie(
       this.config.colors.nautical,
-      this.times.nautical_twilight_begin,
-      this.times.nautical_twilight_end
+      this.degrees.nautical_twilight_begin,
+      this.degrees.nautical_twilight_end
     );
 
     // civil twilight
     this.drawPie(
       this.config.colors.civil,
-      this.times.civil_twilight_begin,
-      this.times.civil_twilight_end
+      this.degrees.civil_twilight_begin,
+      this.degrees.civil_twilight_end
     );
     // sun day
     this.drawPie(
       this.config.colors.day,
-      this.times.sunrise,
-      this.times.sunset
+      this.degrees.sunrise,
+      this.degrees.sunset
     );
 
     // time hands
@@ -118,7 +116,7 @@ class Sunus extends Times {
     let length = this.radius * 0.7;
     let width = this.radius * 0.05;
 
-    this.ctx.rotate(Utils.degToRad(this.times.now));
+    this.ctx.rotate(Utils.degToRad(this.degrees.now));
 
     // path
     this.ctx.beginPath();
@@ -131,16 +129,16 @@ class Sunus extends Times {
 
     this.ctx.stroke();
 
-    this.ctx.rotate(-Utils.degToRad(this.times.now));
+    this.ctx.rotate(-Utils.degToRad(this.degrees.now));
   }
 
   /**
    *
    */
   drawSun() {
-    // let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.times.now - 90));
-    let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.times.now - 90));
-    let y = this.radius * 0.5 * Math.sin(Utils.degToRad(this.times.now - 90));
+    // let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
+    let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
+    let y = this.radius * 0.5 * Math.sin(Utils.degToRad(this.degrees.now - 90));
 
     // console.log(x);
     // console.log(y);

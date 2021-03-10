@@ -12,37 +12,32 @@ export {
 class Times {
 
   /**
-   * @param lat {float}
-   * @param lng {float}
+   *
    */
-  constructor() {
-    navigator.geolocation.getCurrentPosition(this.geo);
-    console.log(this.lat);
-  }
-
-  geo(position) {
-   this.lat = position.coords.latitude;
-   this.lng = position.coords.longitude;
-  }
+  // constructor() {
+  //   navigator.geolocation.getCurrentPosition(this.api.bind(this))
+  // }
 
   /**
    * @return {object}
    */
-  api() {
-    let request, response;
-    request = `https://api.sunrise-sunset.org/json?lat=${this.lat}&lng=${this.lng}&formatted=0`;
+  api(position) {
+    let latitude, longitude, request, response;
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    request = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
     response = Utils.httpGet(request);
     response = JSON.parse(response);
-    return response.results;
+    this.degrees = this.toDeg(response.results);
+    console.log(this.degrees);
   }
 
   /**
    * @return {object}
    */
-  get() {
-    let raw, times;
-    raw = this.api();
-    times = new Object;
+  toDeg(raw) {
+    let times;
+    times = new Object();
     times.now = Utils.timeToDeg(new Date());
     for (const [key, value] of Object.entries(raw)) {
       // console.log(`${key}: ${value}`);

@@ -5,29 +5,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1">
   <title>sunus</title>
+  <link rel="icon" href="./img/sunus.png">
   <link rel="stylesheet" href="./css/master.css">
 </head>
 
 <body>
-  <p>times by <a href="https://sunrise-sunset.org/api">sunrise-sunset.org</a> API</p>
+  <p>times by <a href="https://sunrise-sunset.org/api" target="_blank">sunrise-sunset.org</a> API</p>
 
-  <section>
-    <input type="datetime">
-  </section>
-  
   <main id="clock"></main>
+
+  <!-- <section>
+    <input type="datetime-local">
+  </section> -->
 
   <script type="module">
     import Sunus from './js/Sunus.js';
     // import Times from './js/Times.js';
-    // let testTimes = new Times(36.7201600, -4.4203400);
-    // testTimes.get();
+    // let timesInstance = new Times();
 
     let clock, SunusCanvas;
     clock = document.querySelector('#clock');
-    SunusCanvas = new Sunus(clock, 36.7201600, -4.4203400);
-    // SunusCanvas.drawClock();
-    setInterval(SunusCanvas.drawClock(), 1000);
+    SunusCanvas = new Sunus(clock);
+    setInterval(function() {
+      if (typeof SunusCanvas.degrees !== 'undefined') {
+        SunusCanvas.drawClock();
+      }
+    }, 1000);
   </script>
 </body>
 
