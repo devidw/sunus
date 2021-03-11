@@ -14,20 +14,31 @@
 
   <main id="clock"></main>
 
-  <!-- <section>
+  <section>
     <input type="datetime-local">
-  </section> -->
+  </section>
 
   <script type="module">
     import Sunus from './js/Sunus.js';
     // import Times from './js/Times.js';
     // let timesInstance = new Times();
 
-    let clock, SunusCanvas;
+    let clock, input, SunusCanvas;
     clock = document.querySelector('#clock');
+    input = document.querySelector('input[type="datetime-local"]');
+
+    input.addEventListener('change', function() {
+      let datetime;
+      datetime = input.value;
+      // console.log(new Date(datetime));
+      SunusCanvas.setDatetime(new Date(datetime));
+    });
+
     SunusCanvas = new Sunus(clock);
+    // SunusCanvas.drawClock();
     setInterval(function() {
       if (typeof SunusCanvas.degrees !== 'undefined') {
+        // console.log(SunusCanvas);
         SunusCanvas.drawClock();
       }
     }, 1000);

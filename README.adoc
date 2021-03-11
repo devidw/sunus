@@ -5,3 +5,22 @@
 image::sunus.png[Sunus, 200]
 
 See https://devidwolf.github.io/sunus/[live]
+
+.through the year
+|===
+^| spring ^| summer ^| fall ^| winter
+
+^a| image:spring.png[Sunus, 100]
+^a| image:summer.png[Sunus, 100]
+^a| image:fall.png[Sunus, 100]
+^a| image:winter.png[Sunus, 100]
+
+^| 2021-03-20 +
+   10:37
+^| 2021-06-21 +
+   05:32
+^| 2021-09-22 +
+   21:21
+^| 2021-12-21 +
+   16:59
+|===

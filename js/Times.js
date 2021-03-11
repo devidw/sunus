@@ -14,36 +14,55 @@ class Times {
   /**
    *
    */
-  // constructor() {
-  //   navigator.geolocation.getCurrentPosition(this.api.bind(this))
-  // }
+  init() {
+    this.datetime = new Date();
+    navigator.geolocation.getCurrentPosition(this.setLocation.bind(this));
+  }
+
+  /**
+   * @param datetime {object}
+   */
+  setDatetime(datetime) {
+    this.datetime = datetime;
+    this.degrees = this.toDeg(this.api());
+  }
+
+  /**
+   * @param position {object}
+   */
+  setLocation(position) {
+    this.coords = {};
+    this.coords.latitude = position.coords.latitude;
+    this.coords.longitude = position.coords.longitude;
+
+    this.degrees = this.toDeg(this.api());
+  }
 
   /**
    * @return {object}
    */
-  api(position) {
-    let latitude, longitude, request, response;
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    request = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
+  api() {
+    let date, request, response;
+    date = this.datetime.toISOString().slice(0, 10); // 2021-12-31
+    request = `https://api.sunrise-sunset.org/json?lat=${this.coords.latitude}&lng=${this.coords.longitude}&date=${date}&formatted=0`;
     response = Utils.httpGet(request);
     response = JSON.parse(response);
-    this.degrees = this.toDeg(response.results);
-    console.log(this.degrees);
+    response = response.results;
+    response.now = this.datetime.toISOString();
+    return response;
   }
 
   /**
    * @return {object}
    */
   toDeg(raw) {
-    let times;
-    times = new Object();
-    times.now = Utils.timeToDeg(new Date());
+    let degrees;
+    degrees = new Object();
     for (const [key, value] of Object.entries(raw)) {
       // console.log(`${key}: ${value}`);
-      times[key] = Utils.timeToDeg(value);
+      degrees[key] = Utils.timeToDeg(value);
     }
-    // console.log(times);
-    return times;
+    // console.log(degrees);
+    return degrees;
   }
 }

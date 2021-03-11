@@ -17,10 +17,10 @@ class Sunus extends Times {
    */
   constructor(parent) {
     super();
-    navigator.geolocation.getCurrentPosition(super.api.bind(this));
+    super.init();
 
     this.config = {
-      size: 300, // width, height in pixel
+      diameter: 300, // width, height in pixel
       colors: {
         text: '#222',
         sun: '#222',
@@ -31,20 +31,16 @@ class Sunus extends Times {
         night: '#ff6500',
       },
     };
+    this.config.radius = this.config.diameter / 2;
 
-    // create canvas
     let canvas;
     canvas = document.createElement('canvas');
-    canvas.setAttribute('width', `${this.config.size}px`);
-    canvas.setAttribute('height', `${this.config.size}px`);
+    canvas.setAttribute('width', `${this.config.diameter}px`);
+    canvas.setAttribute('height', `${this.config.diameter}px`);
     parent.appendChild(canvas);
 
     this.ctx = canvas.getContext('2d');
-
-    this.radius = canvas.height / 2;
-    this.ctx.translate(this.radius, this.radius);
-
-    // this.radius = this.radius * 0.9;
+    this.ctx.translate(this.config.radius, this.config.radius);
   }
 
   /**
@@ -52,7 +48,7 @@ class Sunus extends Times {
    */
   drawClock() {
     // background
-    this.ctx.arc(0, 0, this.radius, 0, 2 * Math.PI);
+    this.ctx.arc(0, 0, this.config.radius, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.config.colors.night;
     this.ctx.fill();
 
@@ -84,10 +80,10 @@ class Sunus extends Times {
     );
 
     // time hands
-    // drawTime(this.ctx, this.radius);
+    // drawTime(this.ctx, this.config.radius);
 
     this.drawSun();
-    this.drawDigits(this.ctx, this.radius);
+    this.drawDigits(this.ctx, this.config.radius);
   }
 
   /**
@@ -99,7 +95,7 @@ class Sunus extends Times {
 
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);
-    this.ctx.arc(0, 0, this.radius, Utils.degToRad(startangle), Utils.degToRad(endangle));
+    this.ctx.arc(0, 0, this.config.radius, Utils.degToRad(startangle), Utils.degToRad(endangle));
 
     this.ctx.fillStyle = color;
 
@@ -113,8 +109,8 @@ class Sunus extends Times {
    *
    */
   drawTime() {
-    let length = this.radius * 0.7;
-    let width = this.radius * 0.05;
+    let length = this.config.radius * 0.7;
+    let width = this.config.radius * 0.05;
 
     this.ctx.rotate(Utils.degToRad(this.degrees.now));
 
@@ -136,15 +132,15 @@ class Sunus extends Times {
    *
    */
   drawSun() {
-    // let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
-    let x = this.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
-    let y = this.radius * 0.5 * Math.sin(Utils.degToRad(this.degrees.now - 90));
+    // let x = this.config.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
+    let x = this.config.radius * 0.5 * Math.cos(Utils.degToRad(this.degrees.now - 90));
+    let y = this.config.radius * 0.5 * Math.sin(Utils.degToRad(this.degrees.now - 90));
 
     // console.log(x);
     // console.log(y);
 
     this.ctx.beginPath();
-    this.ctx.arc(x, y, this.radius / 10, 0, 2 * Math.PI);
+    this.ctx.arc(x, y, this.config.radius / 10, 0, 2 * Math.PI);
 
     this.ctx.fillStyle = this.config.colors.sun;
     this.ctx.fill();
@@ -158,7 +154,7 @@ class Sunus extends Times {
     let num;
     let ang;
 
-    this.ctx.font = `${this.radius * 0.1}px Georgia`;
+    this.ctx.font = `${this.config.radius * 0.1}px Georgia`;
     this.ctx.fillStyle = this.config.colors.text;
 
     // centering
@@ -169,11 +165,11 @@ class Sunus extends Times {
     for (let num = 0; num < 24; num++) {
       ang = num * Math.PI / 12;
       this.ctx.rotate(ang);
-      this.ctx.translate(0, -this.radius * 0.9);
+      this.ctx.translate(0, -this.config.radius * 0.9);
       this.ctx.rotate(-ang);
       this.ctx.fillText(num.toString(), 0, 0);
       this.ctx.rotate(ang);
-      this.ctx.translate(0, this.radius * 0.9);
+      this.ctx.translate(0, this.config.radius * 0.9);
       this.ctx.rotate(-ang);
     }
   }
