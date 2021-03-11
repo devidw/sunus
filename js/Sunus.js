@@ -39,8 +39,18 @@ class Sunus extends Times {
     canvas.setAttribute('height', `${this.config.diameter}px`);
     parent.appendChild(canvas);
 
+    this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.ctx.translate(this.config.radius, this.config.radius);
+  }
+
+  /**
+   * render canvas as favicon
+   */
+  renderFavicon() {
+    let link;
+    link = document.head.querySelector('link[rel="icon"]');
+    link.href = this.canvas.toDataURL("image/x-icon");
   }
 
   /**
@@ -84,6 +94,8 @@ class Sunus extends Times {
 
     this.drawSun();
     this.drawDigits(this.ctx, this.config.radius);
+
+    this.renderFavicon();
   }
 
   /**
