@@ -26,10 +26,15 @@
     import SunusClock from './js/SunusClock.js';
     import SunusTable from './js/SunusTable.js';
 
-    // clock rendering
+    // clock initialization
     let clock, SunusCanvas;
     clock = document.querySelector('#clock');
     SunusCanvas = new SunusClock(clock);
+
+    // table initialization
+    let table, SunusTimetable;
+    table = document.querySelector('#times');
+    SunusTimetable = new SunusTable(table);
 
     // handle datetime changes
     let input;
@@ -40,13 +45,8 @@
       SunusCanvas.setDatetime(new Date(datetime));
       SunusTimetable.setDatetime(new Date(datetime));
     });
-    // console.log(SunusCanvas);
 
-    // table rendering
-    let table, SunusTimetable;
-    table = document.querySelector('#times');
-    SunusTimetable = new SunusTable(table);
-
+    // rendering of clock and table
     let tryNo, interval;
     tryNo = 0;
     interval = setInterval(function() {
