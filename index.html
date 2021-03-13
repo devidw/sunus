@@ -41,9 +41,12 @@
     input = document.querySelector('input[type="datetime-local"]');
     input.addEventListener('change', function() {
       let datetime;
-      datetime = input.value;
-      SunusCanvas.setDatetime(new Date(datetime));
-      SunusTimetable.setDatetime(new Date(datetime));
+      datetime = new Date(input.value);
+      SunusCanvas.setDatetime(datetime);
+      SunusCanvas.drawClock();
+      SunusTimetable.setDatetime(datetime);
+      SunusTimetable.fill();
+      console.log(`redrawed to ${datetime}`);
     });
 
     // rendering of clock and table
