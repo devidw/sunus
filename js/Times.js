@@ -24,7 +24,8 @@ class Times {
    */
   setDatetime(datetime) {
     this.datetime = datetime;
-    this.degrees = this.toDeg(this.api());
+    this.times = this.api();
+    this.degrees = this.toDeg(this.times);
   }
 
   /**
@@ -35,7 +36,8 @@ class Times {
     this.coords.latitude = position.coords.latitude;
     this.coords.longitude = position.coords.longitude;
 
-    this.degrees = this.toDeg(this.api());
+    this.times = this.api();
+    this.degrees = this.toDeg(this.times);
   }
 
   /**

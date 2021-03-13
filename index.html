@@ -6,42 +6,53 @@
   <meta name="viewport" content="initial-scale=1">
   <title>sunus</title>
   <link rel="icon" type="image/x-icon">
-  <link rel="stylesheet" href="./css/master.css">
+  <link rel="stylesheet" href="./css/master.min.css">
 </head>
 
 <body>
-  <p>times by <a href="https://sunrise-sunset.org/api" target="_blank">sunrise-sunset.org</a> API</p>
-
   <main id="clock"></main>
+  <article>
+    <section>
+      <input type="datetime-local">
+    </section>
+    <section id="times"></section>
+    <section>
+      <p>times by <a href="https://sunrise-sunset.org/api" target="_blank">sunrise-sunset.org</a></p>
+    </section>
+  </article>
 
-  <section>
-    <input type="datetime-local">
-  </section>
 
   <script type="module">
-    import Sunus from './js/Sunus.js';
-    // import Times from './js/Times.js';
-    // let timesInstance = new Times();
+    import SunusClock from './js/SunusClock.js';
+    import SunusTable from './js/SunusTable.js';
 
-    let clock, input, SunusCanvas;
+    // clock rendering
+    let clock, SunusCanvas;
     clock = document.querySelector('#clock');
-    input = document.querySelector('input[type="datetime-local"]');
+    SunusCanvas = new SunusClock(clock);
 
+    // handle datetime changes
+    let input;
+    input = document.querySelector('input[type="datetime-local"]');
     input.addEventListener('change', function() {
       let datetime;
       datetime = input.value;
-      // console.log(new Date(datetime));
       SunusCanvas.setDatetime(new Date(datetime));
+      SunusTimetable.setDatetime(new Date(datetime));
     });
+    // console.log(SunusCanvas);
 
-    SunusCanvas = new Sunus(clock);
-    // SunusCanvas.drawClock();
+    // table rendering
+    let table, SunusTimetable;
+    table = document.querySelector('#times');
+    SunusTimetable = new SunusTable(table);
+
     setInterval(function() {
       if (typeof SunusCanvas.degrees !== 'undefined') {
-        // console.log(SunusCanvas);
         SunusCanvas.drawClock();
+        SunusTimetable.fill();
       }
-    }, 1000);
+    }, 100);
   </script>
 </body>
 
