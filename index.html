@@ -47,12 +47,18 @@
     table = document.querySelector('#times');
     SunusTimetable = new SunusTable(table);
 
-    setInterval(function() {
+    let tryNo, interval;
+    tryNo = 0;
+    interval = setInterval(function() {
+      tryNo += 1;
+      // console.log(tryNo);
       if (typeof SunusCanvas.degrees !== 'undefined') {
         SunusCanvas.drawClock();
         SunusTimetable.fill();
+        console.log(`drawing done after ${tryNo} tries`);
+        clearInterval(interval);
       }
-    }, 100);
+    }, 1000);
   </script>
 </body>
 
