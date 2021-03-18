@@ -4,9 +4,7 @@
 
 image::sunus.png[Sunus, 200]
 
-24h based clockface with integrated visualizations of the daily solar events 🌞
-
-See https://devidwolf.github.io/sunus/[live]
+24h based clockface with integrated visualizations of the daily solar events 🌞 — See https://devidwolf.github.io/sunus/[live]
 
 Clockface of the 24h based day with focus on solar data.
 Sunrise, sunset and twilights times are illustrated as circular shapes over the full circle aka 24h day. Based on that  you can read out all these times as well as get a really quick summary about the complete solar activity for today (or a given other day). Furthermore the clock hand is illustrated as our sun passing the day. So you can even get the current time out of the diagram. 🙃
