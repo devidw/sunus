@@ -4,6 +4,8 @@
 
 image::sunus.png[Sunus, 200]
 
+24h based clockface with integrated visualizations of the daily solar events 🌞
+
 See https://devidwolf.github.io/sunus/[live]
 
 Clockface of the 24h based day with focus on solar data.
