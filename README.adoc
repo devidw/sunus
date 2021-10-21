@@ -11,7 +11,7 @@ Sunrise, sunset and twilights times are illustrated as circular shapes over the 
 
 .through the year
 |===
-^| spring ^| summer ^| fall ^| winter
+^| Spring ^| Summer ^| Fall ^| Winter
 
 ^a| image:spring.png[Sunus, 100]
 ^a| image:summer.png[Sunus, 100]
