@@ -2,7 +2,7 @@
 
 :imagesdir: img
 
-24h based clockface with integrated visualizations of the daily solar events 🌞 — https://devidwolf.github.io/sunus/[Live View]
+24h based clockface with integrated visualizations of the daily solar events 🌞 — https://devidw.github.io/sunus/[Live View]
 
 image::sunus.png[Sunus, 200]
 
